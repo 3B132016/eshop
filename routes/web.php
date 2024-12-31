@@ -42,3 +42,13 @@ products.update:    PUT|PATCH       products/{product}                  ProductC
 
 products.destroy:   DELETE          products/{product}                  ProductController@destroy 刪除某一項產品
 */
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
